@@ -3,6 +3,7 @@ enum ProductSize {
   M,
   L,
   XL,
+  XXL,
 }
 
 class ProductItemModel {
@@ -21,7 +22,7 @@ class ProductItemModel {
     required this.imgUrl,
     this.size,
     this.description =
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum is simply dummy text of the printing and typesetting industry .',
     required this.price,
     required this.category,
     this.averageRate = 4.5,

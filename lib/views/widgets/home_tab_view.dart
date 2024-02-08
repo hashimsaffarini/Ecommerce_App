@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/models/product_item_model.dart';
+import 'package:ecommerce_app/utils/route/app_routes.dart';
 import 'package:ecommerce_app/views/widgets/custom_carousel_indicatior.dart';
 import 'package:ecommerce_app/views/widgets/product_item.dart';
 import 'package:flutter/material.dart';
@@ -10,17 +11,13 @@ class HomeTabView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 24,
-            ),
+            const SizedBox(height: 24.0),
             const CustomCarouselIndicatior(),
-            const SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -33,12 +30,10 @@ class HomeTabView extends StatelessWidget {
                 TextButton(
                   onPressed: () {},
                   child: const Text('See More'),
-                )
+                ),
               ],
             ),
-            const SizedBox(
-              height: 14,
-            ),
+            const SizedBox(height: 16.0),
             GridView.builder(
               itemCount: dummyProducts.length,
               shrinkWrap: true,
@@ -50,7 +45,11 @@ class HomeTabView extends StatelessWidget {
               ),
               itemBuilder: (context, index) {
                 return InkWell(
-                  onTap: () {},
+                  onTap: () =>
+                      Navigator.of(context, rootNavigator: true).pushNamed(
+                    AppRoutes.productDetails,
+                    arguments: dummyProducts[index],
+                  ),
                   child: ProductItem(
                     productItem: dummyProducts[index],
                   ),
