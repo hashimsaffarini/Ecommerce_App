@@ -29,7 +29,7 @@ class CategoriesTabView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      categorySection.first.category,
+                      categorySection[mainIndex].category,
                       style: Theme.of(context).textTheme.titleLarge!.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
@@ -40,7 +40,7 @@ class CategoriesTabView extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         itemCount: categorySection.length,
                         itemBuilder: (context, index) {
-                          var categoryItem = categorySection[index];
+                          final categoryItem = categorySection[index];
                           return InkWell(
                             onTap: () {},
                             child: Container(
