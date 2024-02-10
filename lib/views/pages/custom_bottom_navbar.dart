@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/utils/app_colors.dart';
+import 'package:ecommerce_app/utils/route/app_routes.dart';
 import 'package:ecommerce_app/views/pages/cart_page.dart';
 import 'package:ecommerce_app/views/pages/favorites_page.dart';
 import 'package:ecommerce_app/views/pages/home_page.dart';
@@ -93,7 +94,11 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
           ),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context, rootNavigator: true).pushNamed(
+                  AppRoutes.searchPage,
+                );
+              },
               icon: const Icon(Icons.search),
             ),
             IconButton(

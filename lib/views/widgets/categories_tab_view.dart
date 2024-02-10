@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ecommerce_app/views/pages/custom_categories_page.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/models/categories_model.dart';
 
@@ -43,44 +44,9 @@ class CategoriesTabView extends StatelessWidget {
                           final categoryItem = categorySection[index];
                           return InkWell(
                             onTap: () {},
-                            child: Container(
-                              width: 100,
-                              margin: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                gradient: const LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    Color.fromRGBO(134, 42, 204, 1),
-                                    Color.fromRGBO(253, 187, 45, 1),
-                                  ],
-                                ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      categoryItem.imgUrl,
-                                      width: 60,
-                                      height: 60,
-                                    ),
-                                    const SizedBox(height: 7),
-                                    Text(
-                                      categoryItem.title,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium!
-                                          .copyWith(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                            child: CustomCategories(
+                              imgUrl: categoryItem.imgUrl,
+                              title: categoryItem.title,
                             ),
                           );
                         },
