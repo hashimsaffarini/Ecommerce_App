@@ -28,8 +28,23 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
         backgroundColor: AppColors.transparent,
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.favorite_border),
+            onPressed: () {
+              setState(() {
+                if (dummyFavorites.contains(widget.product)) {
+                  dummyFavorites.remove(widget.product);
+                } else {
+                  dummyFavorites.add(widget.product);
+                }
+              });
+            },
+            icon: Icon(
+              dummyFavorites.contains(widget.product)
+                  ? Icons.favorite
+                  : Icons.favorite_border,
+              color: dummyFavorites.contains(widget.product)
+                  ? AppColors.primary
+                  : AppColors.black,
+            ),
           ),
         ],
       ),
@@ -40,7 +55,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             Container(
               width: double.infinity,
               height: size.height * 0.6,
-              // padding: EdgeInsets.only(top: size.height * 0.09),
               decoration: BoxDecoration(
                 color: AppColors.grey2,
               ),

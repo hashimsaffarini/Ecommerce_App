@@ -4,9 +4,14 @@ import 'package:ecommerce_app/views/widgets/custom_carousel_indicatior.dart';
 import 'package:ecommerce_app/views/widgets/product_item.dart';
 import 'package:flutter/material.dart';
 
-class HomeTabView extends StatelessWidget {
+class HomeTabView extends StatefulWidget {
   const HomeTabView({super.key});
 
+  @override
+  State<HomeTabView> createState() => _HomeTabViewState();
+}
+
+class _HomeTabViewState extends State<HomeTabView> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -45,13 +50,14 @@ class HomeTabView extends StatelessWidget {
               ),
               itemBuilder: (context, index) {
                 return InkWell(
-                  onTap: () =>
-                      Navigator.of(context, rootNavigator: true).pushNamed(
-                    AppRoutes.productDetails,
-                    arguments: dummyProducts[index],
-                  ),
+                  onTap: () => Navigator.of(context, rootNavigator: true)
+                      .pushNamed(
+                        AppRoutes.productDetails,
+                        arguments: dummyProducts[index],
+                      )
+                      .then((value) => setState(() {})),
                   child: ProductItem(
-                    productItem: dummyProducts[index],
+                    product: dummyProducts[index],
                   ),
                 );
               },

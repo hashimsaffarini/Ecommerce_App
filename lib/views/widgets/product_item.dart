@@ -3,10 +3,15 @@ import 'package:ecommerce_app/models/product_item_model.dart';
 import 'package:ecommerce_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class ProductItem extends StatelessWidget {
-  final ProductItemModel productItem;
-  const ProductItem({super.key, required this.productItem});
+class ProductItem extends StatefulWidget {
+  final ProductItemModel product;
+  const ProductItem({super.key, required this.product});
 
+  @override
+  State<ProductItem> createState() => _ProductItemState();
+}
+
+class _ProductItemState extends State<ProductItem> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,7 +28,7 @@ class ProductItem extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CachedNetworkImage(
-                  imageUrl: productItem.imgUrl,
+                  imageUrl: widget.product.imgUrl,
                   fit: BoxFit.contain,
                   placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator.adaptive(),
@@ -44,8 +49,25 @@ class ProductItem extends StatelessWidget {
                   color: Colors.white54,
                 ),
                 child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.favorite_border),
+                  onPressed: () {
+                    setState(
+                      () {
+                        if (dummyFavorites.contains(widget.product)) {
+                          dummyFavorites.remove(widget.product);
+                        } else {
+                          dummyFavorites.add(widget.product);
+                        }
+                      },
+                    );
+                  },
+                  icon: Icon(
+                    dummyFavorites.contains(widget.product)
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                    color: dummyFavorites.contains(widget.product)
+                        ? AppColors.primary
+                        : AppColors.black,
+                  ),
                 ),
               ),
             ),
@@ -53,19 +75,19 @@ class ProductItem extends StatelessWidget {
         ),
         const SizedBox(height: 4.0),
         Text(
-          productItem.name,
+          widget.product.name,
           style: Theme.of(context).textTheme.titleMedium!.copyWith(
                 fontWeight: FontWeight.w600,
               ),
         ),
         Text(
-          productItem.category,
+          widget.product.category,
           style: Theme.of(context).textTheme.labelMedium!.copyWith(
                 color: Colors.grey,
               ),
         ),
         Text(
-          '\$${productItem.price}',
+          '\$${widget.product.price}',
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
                 fontWeight: FontWeight.w600,
               ),
