@@ -12,7 +12,6 @@ class FavoritesPage extends StatefulWidget {
 class _FavoritesPageState extends State<FavoritesPage> {
   @override
   Widget build(BuildContext context) {
-    debugPrint(dummyFavorites.length.toString());
     return ListView.builder(
       itemCount: dummyFavorites.length,
       itemBuilder: (context, index) {
