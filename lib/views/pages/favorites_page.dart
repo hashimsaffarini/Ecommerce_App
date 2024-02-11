@@ -12,11 +12,6 @@ class FavoritesPage extends StatefulWidget {
 class _FavoritesPageState extends State<FavoritesPage> {
   @override
   Widget build(BuildContext context) {
-    if (dummyFavorites.isEmpty) {
-      return const Center(
-        child: Text('No Favorite Products!'),
-      );
-    }
     return ListView.builder(
       itemCount: dummyFavorites.length,
       itemBuilder: (context, index) {
@@ -24,14 +19,12 @@ class _FavoritesPageState extends State<FavoritesPage> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListTile(
-              onTap: () {
-                Navigator.of(context)
-                    .pushNamed(
-                      AppRoutes.productDetails,
-                      arguments: dummyFavorites[index],
-                    )
-                    .then((value) => setState(() {}));
-              },
+              onTap: () => Navigator.of(context, rootNavigator: true)
+                  .pushNamed(
+                    AppRoutes.productDetails,
+                    arguments: dummyProducts[index],
+                  )
+                  .then((value) => setState(() {})),
               leading: Image.network(
                 dummyFavorites[index].imgUrl,
                 height: 100,
@@ -52,9 +45,11 @@ class _FavoritesPageState extends State<FavoritesPage> {
               ),
               trailing: IconButton(
                 onPressed: () {
-                  setState(() {
-                    dummyFavorites.remove(dummyFavorites[index]);
-                  });
+                  setState(
+                    () {
+                      dummyFavorites.remove(dummyFavorites[index]);
+                    },
+                  );
                 },
                 icon: const Icon(Icons.favorite),
                 color: Theme.of(context).primaryColor,
