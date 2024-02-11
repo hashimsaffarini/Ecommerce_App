@@ -113,6 +113,7 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
         controller: _controller,
         screens: _buildScreens(),
         items: _navBarsItems(),
+        stateManagement: false,
         confineInSafeArea: true,
         resizeToAvoidBottomInset:
             true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
