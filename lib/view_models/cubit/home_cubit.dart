@@ -17,4 +17,21 @@ class HomeCubit extends Cubit<HomeState> {
       emit(HomeError(e.toString()));
     }
   }
+
+  void changeFavorite(String productId) {
+    final product =
+        dummyProducts.firstWhere((element) => element.id == productId);
+    if (product.isFavorite) {
+      product.isFavorite = false;
+      dummyFavorites.remove(product);
+    } else {
+      product.isFavorite = true;
+      dummyFavorites.add(product);
+    }
+    emit(FavoriteChanged(dummyFavorites));
+  }
+
+  void changeFavorited() {
+    emit(FavoriteChanged(dummyFavorites));
+  }
 }

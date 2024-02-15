@@ -52,7 +52,6 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
         size: size!,
       );
       dummyCartOrders.add(cartOrder);
-      dummyFavorites.add(product);
       emit(AddedToCart());
     } catch (e) {
       emit(AddToCartError(e.toString()));

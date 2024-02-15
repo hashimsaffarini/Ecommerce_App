@@ -14,7 +14,7 @@ class ProductItemModel {
   final double price;
   final String category;
   final double averageRate;
-
+   bool isFavorite = false;
   ProductItemModel({
     required this.id,
     required this.name,

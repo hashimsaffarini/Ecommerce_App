@@ -17,3 +17,9 @@ final class HomeError extends HomeState {
 
   HomeError(this.messege);
 }
+
+final class FavoriteChanged extends HomeState {
+  final List<ProductItemModel> fav;
+
+  FavoriteChanged(this.fav);
+}

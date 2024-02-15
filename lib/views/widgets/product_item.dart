@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app/models/product_item_model.dart';
 import 'package:ecommerce_app/utils/app_colors.dart';
+import 'package:ecommerce_app/view_models/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductItem extends StatefulWidget {
   final ProductItemModel product;
@@ -13,86 +15,94 @@ class ProductItem extends StatefulWidget {
 
 class _ProductItemState extends State<ProductItem> {
   @override
+  void initState() {
+    super.initState();
+    context.read<HomeCubit>().changeFavorited();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Stack(
-          children: [
-            Container(
-              height: 111,
-              width: 200,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16.0),
-                color: AppColors.grey,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: CachedNetworkImage(
-                  imageUrl: widget.product.imgUrl,
-                  fit: BoxFit.contain,
-                  placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator.adaptive(),
-                  ),
-                  errorWidget: (context, url, error) => const Icon(
-                    Icons.error,
-                    color: Colors.red,
-                  ),
+    final cubit = BlocProvider.of<HomeCubit>(context);
+    return BlocProvider(
+      create: (context) => HomeCubit(),
+      child: Column(
+        children: [
+          Stack(
+            children: [
+              Container(
+                height: 111,
+                width: 200,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16.0),
+                  color: AppColors.grey,
                 ),
-              ),
-            ),
-            Positioned(
-              top: 8.0,
-              right: 8.0,
-              child: DecoratedBox(
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white54,
-                ),
-                child: IconButton(
-                  onPressed: () {
-                    setState(
-                      () {
-                        if (dummyFavorites.contains(widget.product)) {
-                          dummyFavorites.remove(widget.product);
-                        } else {
-                          dummyFavorites.add(widget.product);
-                        }
-                      },
-                    );
-                  },
-                  icon: Icon(
-                    dummyFavorites.contains(widget.product)
-                        ? Icons.favorite
-                        : Icons.favorite_border,
-                    color: dummyFavorites.contains(widget.product)
-                        ? AppColors.primary
-                        : AppColors.black,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CachedNetworkImage(
+                    imageUrl: widget.product.imgUrl,
+                    fit: BoxFit.contain,
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator.adaptive(),
+                    ),
+                    errorWidget: (context, url, error) => const Icon(
+                      Icons.error,
+                      color: Colors.red,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 4.0),
-        Text(
-          widget.product.name,
-          style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                fontWeight: FontWeight.w600,
+              Positioned(
+                top: 8.0,
+                right: 8.0,
+                child: DecoratedBox(
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white54,
+                  ),
+                  child: BlocBuilder<HomeCubit, HomeState>(
+                    bloc: cubit,
+                    builder: (context, state) {
+                      return IconButton(
+                        onPressed: () =>
+                            cubit.changeFavorite(widget.product.id),
+                        icon: Icon(
+                          state is FavoriteChanged &&
+                                  state.fav.contains(widget.product)
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          color: state is FavoriteChanged &&
+                                  state.fav.contains(widget.product)
+                              ? AppColors.primary
+                              : AppColors.black,
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ),
-        ),
-        Text(
-          widget.product.category,
-          style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                color: Colors.grey,
-              ),
-        ),
-        Text(
-          '\$${widget.product.price}',
-          style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
-        ),
-      ],
+            ],
+          ),
+          const SizedBox(height: 4.0),
+          Text(
+            widget.product.name,
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+          ),
+          Text(
+            widget.product.category,
+            style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                  color: Colors.grey,
+                ),
+          ),
+          Text(
+            '\$${widget.product.price}',
+            style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+          ),
+        ],
+      ),
     );
   }
 }
