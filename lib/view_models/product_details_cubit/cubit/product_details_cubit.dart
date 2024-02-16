@@ -57,4 +57,5 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
       emit(AddToCartError(e.toString()));
     }
   }
+  
 }

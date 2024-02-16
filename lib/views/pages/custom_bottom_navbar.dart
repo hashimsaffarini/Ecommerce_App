@@ -23,11 +23,11 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
   }
 
   List<Widget> _buildScreens() {
-    return const [
-      HomePage(),
-      FavoritesPage(),
+    return [
+      const HomePage(),
+      const FavoritesPage(),
       CartPage(),
-      ProfilePage(),
+      const ProfilePage(),
     ];
   }
 
