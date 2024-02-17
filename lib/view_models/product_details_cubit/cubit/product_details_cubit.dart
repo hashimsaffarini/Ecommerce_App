@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'product_details_state.dart';
 
 class ProductDetailsCubit extends Cubit<ProductDetailsState> {
+  double sum = 0;
   int counter = 0;
   ProductSize? size;
   ProductDetailsCubit() : super(ProductDetailsInitial());
@@ -57,5 +58,11 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
       emit(AddToCartError(e.toString()));
     }
   }
-  
+
+  void calculateTotalPrice() {
+    for (final product in dummyCartOrders) {
+      sum += product.totalPrice;
+    }
+    emit(TotalPriceCalculated(sum));
+  }
 }

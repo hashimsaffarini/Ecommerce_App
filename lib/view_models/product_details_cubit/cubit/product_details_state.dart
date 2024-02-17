@@ -38,3 +38,9 @@ final class SizeChanged extends ProductDetailsState {
 
   SizeChanged(this.size);
 }
+
+final class TotalPriceCalculated extends ProductDetailsState {
+  final double totalPrice;
+
+  TotalPriceCalculated(this.totalPrice);
+}
