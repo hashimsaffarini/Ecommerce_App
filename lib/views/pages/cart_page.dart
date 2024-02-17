@@ -53,7 +53,7 @@ class CartPage extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 65),
+        const SizedBox(height: 64),
         Container(
           height: size.height * 0.235,
           padding: const EdgeInsets.all(10.0),
