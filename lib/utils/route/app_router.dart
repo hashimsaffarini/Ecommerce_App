@@ -4,6 +4,7 @@ import 'package:ecommerce_app/view_models/product_details_cubit/cubit/product_de
 import 'package:ecommerce_app/views/pages/custom_bottom_navbar.dart';
 import 'package:ecommerce_app/views/pages/product_details_page.dart';
 import 'package:ecommerce_app/views/pages/search_page.dart';
+import 'package:ecommerce_app/views/widgets/visa_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,6 +32,11 @@ class AppRouter {
       case AppRoutes.searchPage:
         return MaterialPageRoute(
           builder: (_) => const SearchPage(),
+          settings: settings,
+        );
+      case AppRoutes.cartPage:
+        return MaterialPageRoute(
+          builder: (_) => const VisaCart(),
           settings: settings,
         );
       default:

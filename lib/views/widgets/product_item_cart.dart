@@ -72,13 +72,24 @@ class ProductItemCart extends StatelessWidget {
                       ).toList(),
                     ),
                     const SizedBox(height: 5),
-                    Text(
-                      '\$${product.product.price}',
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'Price= \$${product.product.price} ',
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          '| Quantity: ${product.quantity}',
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ],

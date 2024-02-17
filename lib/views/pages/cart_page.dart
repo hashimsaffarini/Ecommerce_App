@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/models/cart_orders_model.dart';
 import 'package:ecommerce_app/utils/app_colors.dart';
+import 'package:ecommerce_app/utils/route/app_routes.dart';
 import 'package:ecommerce_app/view_models/product_details_cubit/cubit/product_details_cubit.dart';
 import 'package:ecommerce_app/views/widgets/product_item_cart.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,6 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-
   @override
   void initState() {
     super.initState();
@@ -57,7 +57,6 @@ class _CartPageState extends State<CartPage> {
                       ),
                       itemBuilder: (_, int index) {
                         final product = dummyCartOrders[index];
-    
                         return InkWell(
                           onTap: () {},
                           child: ProductItemCart(
@@ -152,9 +151,10 @@ class _CartPageState extends State<CartPage> {
                   Text(
                     '\$${(cubit.sum)}', // This should be dynamically calculated
                     style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.primary),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primary,
+                    ),
                   ),
                 ],
               ),
@@ -165,7 +165,10 @@ class _CartPageState extends State<CartPage> {
                   foregroundColor: AppColors.white,
                   minimumSize: const Size(300, 39),
                 ),
-                onPressed: () {},
+                onPressed: () =>
+                    Navigator.of(context, rootNavigator: true).pushNamed(
+                  AppRoutes.cartPage,
+                ),
                 child: const Text(
                   'Buy Now',
                   style: TextStyle(
