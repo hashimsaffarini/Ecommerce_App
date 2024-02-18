@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/utils/app_colors.dart';
 import 'package:ecommerce_app/utils/route/app_routes.dart';
+import 'package:ecommerce_app/view_models/cubit/profile/cubit/profile_cubit.dart';
 import 'package:ecommerce_app/view_models/product_details_cubit/cubit/product_details_cubit.dart';
 import 'package:ecommerce_app/views/pages/cart_page.dart';
 import 'package:ecommerce_app/views/pages/favorites_page.dart';
@@ -32,7 +33,10 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
         create: (context) => ProductDetailsCubit(),
         child: const CartPage(),
       ),
-      const ProfilePage(),
+      BlocProvider(
+        create: (context) => ProfileCubit(),
+        child: const ProfilePage(),
+      ),
     ];
   }
 
@@ -73,46 +77,47 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          leading: const Padding(
-            padding: EdgeInsets.all(4.0),
-            child: CircleAvatar(
-              radius: 30,
-              backgroundImage: AssetImage('assets/images/me.jpg'),
-            ),
+        leading: const Padding(
+          padding: EdgeInsets.all(4.0),
+          child: CircleAvatar(
+            radius: 30,
+            backgroundImage: AssetImage('assets/images/me.jpg'),
           ),
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Hi, Hashim',
-                style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-              Text(
-                'Let\'s go shopping!',
-                style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                      color: AppColors.grey,
-                    ),
-              ),
-            ],
+        ),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Hi, Hashim',
+              style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+            Text(
+              'Let\'s go shopping!',
+              style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                    color: AppColors.grey,
+                  ),
+            ),
+          ],
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context, rootNavigator: true)
+                  .pushNamed(
+                    AppRoutes.searchPage,
+                  )
+                  .then((value) => setState(() {}));
+            },
+            icon: const Icon(Icons.search),
           ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.of(context, rootNavigator: true)
-                    .pushNamed(
-                      AppRoutes.searchPage,
-                    )
-                    .then((value) => setState(() {}));
-              },
-              icon: const Icon(Icons.search),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.notifications_none),
-            ),
-          ]),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.notifications_none),
+          ),
+        ],
+      ),
       body: PersistentTabView(
         context,
         controller: _controller,

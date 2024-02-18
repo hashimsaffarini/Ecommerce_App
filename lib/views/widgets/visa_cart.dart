@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class VisaCart extends StatelessWidget {
@@ -17,7 +18,7 @@ class VisaCart extends StatelessWidget {
         ),
         foregroundColor: const Color.fromARGB(255, 92, 67, 191),
         centerTitle: true,
-        backgroundColor: const Color.fromARGB(157, 0, 0, 0),
+        backgroundColor: AppColors.grey,
         actions: [
           IconButton(
             icon: const Icon(Icons.payment),
