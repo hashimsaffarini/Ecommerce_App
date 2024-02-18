@@ -23,3 +23,17 @@ final class FavoriteChanged extends HomeState {
 
   FavoriteChanged(this.fav);
 }
+
+final class HomeCategoriesLoaded extends HomeState {
+  final List<List<CategoriesModel>> categories;
+
+  HomeCategoriesLoaded(this.categories);
+}
+
+final class HomeCategoriesError extends HomeState {
+  final String messege;
+
+  HomeCategoriesError(this.messege);
+}
+
+final class HomeCategoriesLoading extends HomeState {}

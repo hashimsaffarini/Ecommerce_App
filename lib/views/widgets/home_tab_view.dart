@@ -14,6 +14,11 @@ class HomeTabView extends StatefulWidget {
 
 class _HomeTabViewState extends State<HomeTabView> {
   @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<HomeCubit>(context).getHomeData();
+  }
+  @override
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<HomeCubit>(context);
     return BlocBuilder<HomeCubit, HomeState>(
