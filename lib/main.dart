@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'E-Commerce App',
       theme: AppTheme.lightTheme(),
       initialRoute: AppRoutes.bottomNavbar,
