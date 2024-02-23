@@ -2,6 +2,7 @@ import 'package:ecommerce_app/models/product_item_model.dart';
 import 'package:ecommerce_app/utils/route/app_routes.dart';
 import 'package:ecommerce_app/view_models/product_details_cubit/cubit/product_details_cubit.dart';
 import 'package:ecommerce_app/views/pages/custom_bottom_navbar.dart';
+import 'package:ecommerce_app/views/pages/login_page.dart';
 import 'package:ecommerce_app/views/pages/product_details_page.dart';
 import 'package:ecommerce_app/views/pages/search_page.dart';
 import 'package:ecommerce_app/views/widgets/visa_cart.dart';
@@ -37,6 +38,11 @@ class AppRouter {
       case AppRoutes.cartPage:
         return MaterialPageRoute(
           builder: (_) => const VisaCart(),
+          settings: settings,
+        );
+      case AppRoutes.homeLogin:
+        return MaterialPageRoute(
+          builder: (_) => const LoginPage(),
           settings: settings,
         );
       default:

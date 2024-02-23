@@ -264,17 +264,12 @@ class VisaCart extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors
-                        .transparent, // Make the button's background transparent
-                    shadowColor: Colors
-                        .transparent, // Remove shadow since it's on a gradient background
+                    backgroundColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          14.0), // Match Container's border
+                      borderRadius: BorderRadius.circular(14.0),
                     ),
-                    // Ensure the button fills the container
-                    minimumSize:
-                        const Size(double.infinity, 50), // Provide height
+                    minimumSize: const Size(double.infinity, 50),
                   ),
                   child: const Text(
                     'Pay Now',
