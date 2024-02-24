@@ -1,4 +1,7 @@
+import 'package:ecommerce_app/models/product_item_model.dart';
+import 'package:ecommerce_app/services/firestore_services.dart';
 import 'package:ecommerce_app/utils/app_colors.dart';
+import 'package:ecommerce_app/utils/route/api_paths.dart';
 import 'package:ecommerce_app/utils/route/app_routes.dart';
 import 'package:ecommerce_app/view_models/cubit/profile/cubit/profile_cubit.dart';
 import 'package:ecommerce_app/view_models/product_details_cubit/cubit/product_details_cubit.dart';
