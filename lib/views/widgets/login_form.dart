@@ -151,7 +151,8 @@ class _LoginFormState extends State<LoginForm> {
             buildWhen: (previous, current) =>
                 current is AuthLoading ||
                 current is AuthFailure ||
-                current is AuthSuccess,
+                current is AuthSuccess ||
+                current is AuthInitial,
             builder: (context, state) {
               if (state is AuthLoading) {
                 return const MainButton(

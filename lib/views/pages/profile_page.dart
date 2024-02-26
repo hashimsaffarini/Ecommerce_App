@@ -1,5 +1,8 @@
 import 'package:ecommerce_app/utils/app_colors.dart';
+import 'package:ecommerce_app/utils/route/app_routes.dart';
+import 'package:ecommerce_app/view_models/auth_cubit/auth_cubit.dart';
 import 'package:ecommerce_app/view_models/cubit/profile/cubit/profile_cubit.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,7 +22,10 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final firebaseAuth = FirebaseAuth.instance;
     final cubit = BlocProvider.of<ProfileCubit>(context);
+    final authCubit = BlocProvider.of<AuthCubit>(context);
+
     return BlocBuilder<ProfileCubit, ProfileState>(
       bloc: cubit,
       buildWhen: (previous, current) =>
@@ -75,9 +81,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const Text(
-                'hashimsaffarini044@gmail.com',
-                style: TextStyle(
+              Text(
+                firebaseAuth.currentUser!.email.toString(),
+                style: const TextStyle(
                   color: AppColors.grey,
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
@@ -141,7 +147,13 @@ class _ProfilePageState extends State<ProfilePage> {
                             color: AppColors.grey,
                           ),
                         ),
-                        onTap: item.onTap,
+                        onTap: index == state.profile.length - 1
+                            ? () {
+                                Navigator.of(context, rootNavigator: true)
+                                    .pushReplacementNamed(AppRoutes.homeLogin);
+                                authCubit.signOut();
+                              }
+                            : () {},
                       ),
                     );
                   },

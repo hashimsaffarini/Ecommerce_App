@@ -13,8 +13,10 @@ class HomeCubit extends Cubit<HomeState> {
   void getHomeCategories() async {
     emit(HomeCategoriesLoading());
     try {
-      final categories = dummyCategories;
-      await Future.delayed(const Duration(seconds: 2));
+      final categories1 = await homeServices.getCategoriesClothes();
+      final categories2 = await homeServices.getCategoriesDevices();
+      final categories = [categories1, categories2];
+      //await Future.delayed(const Duration(seconds: 2));
       emit(HomeCategoriesLoaded(categories));
     } catch (e) {
       emit(HomeCategoriesError(e.toString()));
@@ -25,7 +27,7 @@ class HomeCubit extends Cubit<HomeState> {
     emit(HomeLoading());
     try {
       final products = await homeServices.getProducts();
-      final announcements = dummyAnnouncements;
+      final announcements = await homeServices.getAnnouncements();
       //await Future.delayed(const Duration(seconds: 1));
       emit(HomeLoaded(products, announcements));
     } catch (e) {
