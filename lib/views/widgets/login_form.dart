@@ -2,6 +2,7 @@ import 'package:ecommerce_app/utils/app_colors.dart';
 import 'package:ecommerce_app/utils/route/app_routes.dart';
 import 'package:ecommerce_app/view_models/auth_cubit/auth_cubit.dart';
 import 'package:ecommerce_app/views/widgets/main_button.dart';
+import 'package:ecommerce_app/views/widgets/validation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,15 +42,7 @@ class _LoginFormState extends State<LoginForm> {
     }
   }
 
-  String? validateEmail(String value) {
-    String pattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
-    RegExp regExp = RegExp(pattern);
-    if (regExp.hasMatch(value)) {
-      return null;
-    } else {
-      return 'Please enter a valid email';
-    }
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -168,11 +161,36 @@ class _LoginFormState extends State<LoginForm> {
           const SizedBox(height: 16),
           Align(
             alignment: Alignment.center,
-            child: Text(
-              'or, using other method',
-              style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                    color: AppColors.grey,
-                  ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Don\'t have an account?',
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: AppColors.grey,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context, rootNavigator: true).pushNamed(
+                          AppRoutes.signUp,
+                        );
+                      },
+                      child: const Text('Sign Up'),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'or, using other method',
+                  style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                        color: AppColors.grey,
+                      ),
+                ),
+              ],
             ),
           ),
         ],

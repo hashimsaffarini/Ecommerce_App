@@ -8,9 +8,11 @@ class MainButton extends StatelessWidget {
   final Color bgColor;
   final Color frColor;
   final VoidCallback? onPressed;
+  final double cercular;
 
   const MainButton({
     super.key,
+    this.cercular = 8,
     this.height = 50,
     this.title,
     this.child,
@@ -29,7 +31,7 @@ class MainButton extends StatelessWidget {
           backgroundColor: bgColor,
           foregroundColor: frColor,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(cercular),
           ),
         ),
         onPressed: onPressed,

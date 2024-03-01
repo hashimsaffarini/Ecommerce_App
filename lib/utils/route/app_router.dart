@@ -5,6 +5,7 @@ import 'package:ecommerce_app/views/pages/custom_bottom_navbar.dart';
 import 'package:ecommerce_app/views/pages/login_page.dart';
 import 'package:ecommerce_app/views/pages/product_details_page.dart';
 import 'package:ecommerce_app/views/pages/search_page.dart';
+import 'package:ecommerce_app/views/pages/sign_up_page.dart';
 import 'package:ecommerce_app/views/widgets/visa_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,6 +44,11 @@ class AppRouter {
       case AppRoutes.homeLogin:
         return MaterialPageRoute(
           builder: (_) => const LoginPage(),
+          settings: settings,
+        );
+      case AppRoutes.signUp:
+        return MaterialPageRoute(
+          builder: (_) => const SignUpPage(),
           settings: settings,
         );
       default:
