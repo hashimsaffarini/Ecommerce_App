@@ -17,7 +17,6 @@ class _ProductItemState extends State<ProductItem> {
   @override
   void initState() {
     super.initState();
-    context.read<HomeCubit>().changeFavorited();
   }
 
   @override
@@ -61,17 +60,21 @@ class _ProductItemState extends State<ProductItem> {
                   ),
                   child: BlocBuilder<HomeCubit, HomeState>(
                     bloc: cubit,
+                    buildWhen: (previous, current) =>
+                        current is deleteOrAdd || current is FavoritesPressed,
                     builder: (context, state) {
+                      bool isProductInFavorites = state is deleteOrAdd &&
+                          state.productsFav.any(
+                            (favProduct) => favProduct.id == widget.product.id,
+                          );
                       return IconButton(
                         onPressed: () =>
                             cubit.changeFavorite(widget.product.id),
                         icon: Icon(
-                          state is FavoriteChanged &&
-                                  state.fav.contains(widget.product)
+                          isProductInFavorites
                               ? Icons.favorite
                               : Icons.favorite_border,
-                          color: state is FavoriteChanged &&
-                                  state.fav.contains(widget.product)
+                          color: isProductInFavorites
                               ? AppColors.primary
                               : AppColors.black,
                         ),

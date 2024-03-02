@@ -37,3 +37,20 @@ final class HomeCategoriesError extends HomeState {
 }
 
 final class HomeCategoriesLoading extends HomeState {}
+
+final class FavoritesPressed extends HomeState {
+  FavoritesPressed();
+}
+
+final class FavoriteError extends HomeState {
+  final String messege;
+
+  FavoriteError(this.messege);
+}
+
+final class deleteOrAdd extends HomeState {
+  final ProductItemModel product;
+  final List<ProductItemModel> productsFav;
+
+  deleteOrAdd(this.product, this.productsFav);
+}
