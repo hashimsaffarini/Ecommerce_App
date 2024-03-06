@@ -13,6 +13,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      
       itemCount: dummyFavorites.length,
       itemBuilder: (context, index) {
         return Card(

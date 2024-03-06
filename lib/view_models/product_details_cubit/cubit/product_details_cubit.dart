@@ -63,10 +63,32 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
     }
   }
 
-  void calculateTotalPrice() {
-    for (final product in dummyCartOrders) {
-      sum += product.totalPrice;
+  void calculateTotalPrice() async {
+    emit(ProductDetailsLoading());
+    try {
+      final currentUser = await authServices.currentUser();
+      final uid = currentUser!.uid;
+      final dummyCartOrders = await productDetailsServices.getCartItems(uid);
+
+      sum = 0; // Reset sum before calculating
+      for (final product in dummyCartOrders) {
+        sum += product.totalPrice;
+      }
+      emit(TotalPriceCalculated(sum));
+    } catch (e) {
+      emit(CartItemsError(e.toString()));
     }
-    emit(TotalPriceCalculated(sum));
+  }
+
+  Future<void> getItems() async {
+    emit(ProductDetailsLoading());
+    try {
+      final currentUser = await authServices.currentUser();
+      final uid = currentUser!.uid;
+      final products = await productDetailsServices.getCartItems(uid);
+      emit(CartItemsLoaded(products));
+    } catch (e) {
+      emit(CartItemsError(e.toString()));
+    }
   }
 }

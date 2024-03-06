@@ -44,3 +44,15 @@ final class TotalPriceCalculated extends ProductDetailsState {
 
   TotalPriceCalculated(this.totalPrice);
 }
+
+final class CartItemsLoaded extends ProductDetailsState {
+  final List<CartOrdersModel> cartItems;
+
+  CartItemsLoaded(this.cartItems);
+}
+
+final class CartItemsError extends ProductDetailsState {
+  final String message;
+
+  CartItemsError(this.message);
+}

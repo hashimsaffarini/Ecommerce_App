@@ -55,3 +55,10 @@ class CartOrdersModel {
 }
 
 List<CartOrdersModel> dummyCartOrders = [];
+// Future<List<CartOrdersModel>> getItems() async {
+//   final ProductDetailsServicesImpl product = ProductDetailsServicesImpl();
+//   final authServices = AuthServicesImpl();
+//   final currentUser = await authServices.currentUser();
+//   final uid = currentUser!.uid;
+//   return product.getCartItems(uid) as List<CartOrdersModel>;
+// }

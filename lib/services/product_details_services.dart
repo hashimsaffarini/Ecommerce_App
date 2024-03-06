@@ -6,6 +6,7 @@ import 'package:ecommerce_app/utils/route/api_paths.dart';
 abstract class ProductDetailsServices {
   Future<ProductItemModel> getProduct(String id);
   Future<void> addToCart(String uid, CartOrdersModel cartOrder);
+  Future<List<CartOrdersModel>> getCartItems(String uid);
 }
 
 class ProductDetailsServicesImpl implements ProductDetailsServices {
@@ -24,5 +25,12 @@ class ProductDetailsServicesImpl implements ProductDetailsServices {
       await firestoreService.setData(
         path: ApiPaths.cartItem(uid, cartOrder.id),
         data: cartOrder.toMap(),
+      );
+
+  @override
+  Future<List<CartOrdersModel>> getCartItems(String uid) async =>
+      await firestoreService.getCollection<CartOrdersModel>(
+        path: ApiPaths.cartItems(uid),
+        builder: (data, documentId) => CartOrdersModel.fromMap(data),
       );
 }
