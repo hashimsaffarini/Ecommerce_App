@@ -64,7 +64,6 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   }
 
   void calculateTotalPrice() async {
-    emit(ProductDetailsLoading());
     try {
       final currentUser = await authServices.currentUser();
       final uid = currentUser!.uid;

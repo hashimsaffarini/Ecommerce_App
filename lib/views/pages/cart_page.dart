@@ -14,7 +14,12 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  @override
+  // @override
+  // initState() {
+  //   super.initState();
+  //   BlocProvider.of<ProductDetailsCubit>(context).calculateTotalPrice();
+  // }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -64,7 +69,6 @@ class _CartPageState extends State<CartPage> {
                           final product = state is CartItemsLoaded
                               ? state.cartItems[index]
                               : null;
-                          debugPrint('hiiiiiiiiiii $index: $product');
                           return InkWell(
                             onTap: () {},
                             child: ProductItemCart(
