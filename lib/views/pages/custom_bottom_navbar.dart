@@ -30,7 +30,11 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
       const HomePage(),
       const FavoritesPage(),
       BlocProvider(
-        create: (context) => ProductDetailsCubit(),
+        create: (context) {
+          final cubit = ProductDetailsCubit();
+          cubit.getItems();
+          return cubit;
+        },
         child: const CartPage(),
       ),
       BlocProvider(

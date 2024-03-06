@@ -19,7 +19,8 @@ class CheckoutServicesImpl implements CheckoutServices {
   Future<List<CartOrdersModel>> getCartItems(String uid) async =>
       await firestoreService.getCollection<CartOrdersModel>(
         path: ApiPaths.cartItems(uid),
-        builder: (data, documentId) => CartOrdersModel.fromMap(data),
+        builder: (data, documentId) =>
+            CartOrdersModel.fromMap(data, documentId),
       );
 
   @override

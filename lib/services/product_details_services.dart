@@ -27,10 +27,12 @@ class ProductDetailsServicesImpl implements ProductDetailsServices {
         data: cartOrder.toMap(),
       );
 
-  @override
-  Future<List<CartOrdersModel>> getCartItems(String uid) async =>
-      await firestoreService.getCollection<CartOrdersModel>(
-        path: ApiPaths.cartItems(uid),
-        builder: (data, documentId) => CartOrdersModel.fromMap(data),
-      );
+@override
+Future<List<CartOrdersModel>> getCartItems(String uid) async =>
+    await firestoreService.getCollection<CartOrdersModel>(
+      path: ApiPaths.cartItems(uid),
+      builder: (data, documentId) =>
+          CartOrdersModel.fromMap(data, documentId),
+    );
+
 }

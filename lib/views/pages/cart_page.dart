@@ -15,29 +15,23 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   @override
-  void initState() {
-    super.initState();
-    _fetchData();
-  }
-
-  _fetchData() async {
-    await BlocProvider.of<ProductDetailsCubit>(context).getItems();
-    BlocProvider.of<ProductDetailsCubit>(context).calculateTotalPrice();
-    debugPrint('hiiiiiiiiiii');
-  }
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final cubit = BlocProvider.of<ProductDetailsCubit>(context);
     return BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
       bloc: cubit,
+      buildWhen: (previous, current) =>
+          current is CartItemsLoaded ||
+          current is TotalPriceCalculated ||
+          current is ProductDetailsLoading ||
+          current is ProductDetailsError,
       builder: (context, state) {
         if (state is ProductDetailsLoading) {
           return const Center(
             child: CircularProgressIndicator.adaptive(),
           );
-        } else {
+        } else if (state is CartItemsLoaded || state is TotalPriceCalculated) {
           return Column(
             children: [
               Expanded(
@@ -45,6 +39,16 @@ class _CartPageState extends State<CartPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const Padding(
+                        padding: EdgeInsets.only(left: 13, top: 13),
+                        child: Text(
+                          'My Cart',
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                       GridView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -68,16 +72,6 @@ class _CartPageState extends State<CartPage> {
                             ),
                           );
                         },
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 13, top: 13),
-                        child: Text(
-                          'My Cart',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
                       ),
                     ],
                   ),
@@ -193,6 +187,10 @@ class _CartPageState extends State<CartPage> {
                 ),
               )
             ],
+          );
+        } else {
+          return const Center(
+            child: Text('No items in cart'),
           );
         }
       },

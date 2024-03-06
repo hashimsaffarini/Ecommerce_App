@@ -27,9 +27,9 @@ class CartOrdersModel {
     return result;
   }
 
-  factory CartOrdersModel.fromMap(Map<String, dynamic> map) {
+  factory CartOrdersModel.fromMap(Map<String, dynamic> map, String id) {
     return CartOrdersModel(
-      id: map['id'] ?? '',
+      id: id,
       product: ProductItemModel.fromMap(map['product'], map['product']['id']),
       totalPrice: map['totalPrice']?.toDouble() ?? 0.0,
       quantity: map['quantity']?.toInt() ?? 1,
